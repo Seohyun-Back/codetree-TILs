@@ -103,6 +103,7 @@ public class Main {
 				if (tempList.size() == 1)
 					attacker = weakest.get(0);
 				else {
+					li = weakest.listIterator(weakest.size());
 					while (li.hasPrevious()) {
 						Node curNode = li.previous();
 						if ((attacker.x == 0 && attacker.y == 0) || attacker.y < curNode.y)
@@ -137,6 +138,7 @@ public class Main {
 				if (tempList.size() == 1)
 					target = strongest.get(0);
 				else {
+					li = strongest.listIterator();
 					while (li.hasNext()) {
 						Node curNode = li.next();
 						if ((target.x == 0 && target.y == 0) || target.y < curNode.y)
@@ -242,7 +244,11 @@ public class Main {
 			}
 		}
 		while (turn <= K) {
-			getAttackerAndTarget(); // 공격자,타깃 선정
+			getAttackerAndTarget(); // 공격자,타깃 선정//			
+//			// 바보
+//			System.out.println("turn " + turn);
+//			System.out.println("attacker: " + attacker.x + " " + attacker.y);
+//			System.out.println("target: " + target.x + " " + target.y);
 			map[attacker.x][attacker.y].hp += (N + M);
 			laserAttack = false; // 레이저 공격
 			visited = new boolean[N + 1][M + 1];
@@ -270,9 +276,6 @@ public class Main {
 			}
 
 //			// 바보
-//			System.out.println("turn " + turn);
-//			System.out.println("attacker: " + attacker.x + " " + attacker.y);
-//			System.out.println("target: " + target.x + " " + target.y);
 //			System.out.println((laserAttack) ? "laserattack" : "bombattack");
 //			for (int i = 1; i <= N; i++) {
 //				for (int j = 1; j <= M; j++) {
