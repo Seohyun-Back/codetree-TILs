@@ -101,7 +101,7 @@ public class Main {
 					}
 				}
 				if (tempList.size() == 1)
-					attacker = weakest.get(0);
+					attacker = tempList.get(0);
 				else {
 					li = weakest.listIterator(weakest.size());
 					while (li.hasPrevious()) {
@@ -136,7 +136,7 @@ public class Main {
 					}
 				}
 				if (tempList.size() == 1)
-					target = strongest.get(0);
+					target = tempList.get(0);
 				else {
 					li = strongest.listIterator();
 					while (li.hasNext()) {
