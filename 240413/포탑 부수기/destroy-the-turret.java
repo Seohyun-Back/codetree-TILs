@@ -90,7 +90,7 @@ public class Main {
 			}
 			if (attacker.x == 0 && attacker.y == 0) {
 				List<Node> tempList = new ArrayList<>();
-				li = attackOrder.listIterator(attackOrder.size());
+				li = weakest.listIterator(weakest.size());
 				while (li.hasPrevious()) {
 					Node curNode = li.previous();
 					if (tempList.isEmpty() || curNode.x + curNode.y == tempList.get(0).x + tempList.get(0).y) {
@@ -124,7 +124,7 @@ public class Main {
 			}
 			if (target.x == 0 && target.y == 0) {
 				List<Node> tempList = new ArrayList<>();
-				li = attackOrder.listIterator();
+				li = strongest.listIterator();
 				while (li.hasNext()) {
 					Node curNode = li.next();
 					if (tempList.isEmpty() || curNode.x + curNode.y == tempList.get(0).x + tempList.get(0).y) {
