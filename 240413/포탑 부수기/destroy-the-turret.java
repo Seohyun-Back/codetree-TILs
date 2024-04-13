@@ -81,12 +81,18 @@ public class Main {
 			attacker = weakest.get(0);
 		} else {
 			ListIterator<Node> li = attackOrder.listIterator(attackOrder.size());
+			boolean tok = false;
 			while (li.hasPrevious()) {
 				Node curNode = li.previous();
-				if (weakest.contains(curNode)) {
-					attacker = curNode;
-					break;
+				for (Node n : weakest) {
+					if (n.x == curNode.x && n.y == curNode.y) {
+						attacker = curNode;
+						tok = true;
+						break;
+					}
 				}
+				if (tok)
+					break;
 			}
 			if (attacker.x == 0 && attacker.y == 0) {
 				List<Node> tempList = new ArrayList<>();
@@ -116,12 +122,18 @@ public class Main {
 			target = strongest.get(0);
 		} else {
 			ListIterator<Node> li = attackOrder.listIterator();
+			boolean tok = false;
 			while (li.hasNext()) {
 				Node curNode = li.next();
-				if (strongest.contains(curNode)) {
-					target = curNode;
-					break;
+				for (Node n : strongest) {
+					if (n.x == curNode.x && n.y == curNode.y) {
+						attacker = curNode;
+						tok = true;
+						break;
+					}
 				}
+				if (tok)
+					break;
 			}
 			if (target.x == 0 && target.y == 0) {
 				List<Node> tempList = new ArrayList<>();
@@ -147,6 +159,10 @@ public class Main {
 				}
 			}
 		}
+		for (Node n : attackOrder) {
+			if (n.x == attacker.x && n.y == attacker.y)
+				attackOrder.remove(n);
+		}
 		attackOrder.add(attacker);
 	}
 
@@ -168,7 +184,7 @@ public class Main {
 			if (ny > M)
 				ny -= M;
 
-			if (nx==e.x && ny==e.y) {
+			if (nx == e.x && ny == e.y) {
 				laserStack.push(new Node(nx, ny));
 				visited[nx][ny] = true;
 				laserAttack = true;
@@ -244,11 +260,11 @@ public class Main {
 			}
 		}
 		while (turn <= K) {
-			getAttackerAndTarget(); // 공격자,타깃 선정//			
-//			// 바보
-//			System.out.println("turn " + turn);
-//			System.out.println("attacker: " + attacker.x + " " + attacker.y);
-//			System.out.println("target: " + target.x + " " + target.y);
+			getAttackerAndTarget(); // 공격자,타깃 선정//
+			// // 바보
+			// System.out.println("turn " + turn);
+			// System.out.println("attacker: " + attacker.x + " " + attacker.y);
+			// System.out.println("target: " + target.x + " " + target.y);
 			map[attacker.x][attacker.y].hp += (N + M);
 			laserAttack = false; // 레이저 공격
 			visited = new boolean[N + 1][M + 1];
@@ -275,16 +291,16 @@ public class Main {
 				}
 			}
 
-//			// 바보
-//			System.out.println((laserAttack) ? "laserattack" : "bombattack");
-//			for (int i = 1; i <= N; i++) {
-//				for (int j = 1; j <= M; j++) {
-//					System.out.print(map[i][j].hp + " ");
-//				}
-//				System.out.print("\n");
-//			}
-//			System.out.print("\n");
-//			//
+			// // 바보
+			// System.out.println((laserAttack) ? "laserattack" : "bombattack");
+			// for (int i = 1; i <= N; i++) {
+			// 	for (int j = 1; j <= M; j++) {
+			// 		System.out.print(map[i][j].hp + " ");
+			// 	}
+			// 	System.out.print("\n");
+			// }
+			// System.out.print("\n");
+			// //
 
 			if (!checkRemaining())
 				break;
