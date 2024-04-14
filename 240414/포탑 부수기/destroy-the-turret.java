@@ -125,10 +125,12 @@ public class Main {
 			Stack<Node> tempStack = new Stack<>();
 			while (li.hasPrevious()) {
 				Node curNode = li.previous();
-				for (Node n : strongest) {
+				for(int i=0; i<strongest.size(); i++) {
+					Node n = strongest.get(i);
 					if (n.x == curNode.x && n.y == curNode.y) {
 						tempStack.push(n);
 						strongest.remove(n);
+						i--;
 					}
 				}
 			}
