@@ -125,7 +125,7 @@ public class Main {
 			Stack<Node> tempStack = new Stack<>();
 			while (li.hasPrevious()) {
 				Node curNode = li.previous();
-				for(int i=0; i<strongest.size(); i++) {
+				for (int i = 0; i < strongest.size(); i++) {
 					Node n = strongest.get(i);
 					if (n.x == curNode.x && n.y == curNode.y) {
 						tempStack.push(n);
@@ -244,8 +244,11 @@ public class Main {
 				nx -= N;
 			if (ny > M)
 				ny -= M;
-			if (!map[nx][ny].out)
+			if (!map[nx][ny].out) {
+				if (nx == attacker.x && ny == attacker.y)
+					continue;
 				damage(new Node(nx, ny), map[attacker.x][attacker.y].hp / 2);
+			}
 		}
 
 	}
@@ -267,10 +270,11 @@ public class Main {
 		}
 		while (turn <= K) {
 			getAttackerAndTarget(); // 공격자,타깃 선정//
-//			// 바보
-//			System.out.println("turn " + turn);
-//			System.out.println("attacker: " + attacker.x + " " + attacker.y);
-//			System.out.println("target: " + target.x + " " + target.y);
+			// // 바보
+			// System.out.println("turn " + turn);
+			// System.out.println("attacker: " + attacker.x + " " + attacker.y);
+			// System.out.println("target: " + target.x + " " + target.y);
+			// //
 			map[attacker.x][attacker.y].hp += (N + M);
 			laserAttack = false; // 레이저 공격
 			visited = new boolean[N + 1][M + 1];
@@ -297,16 +301,16 @@ public class Main {
 				}
 			}
 
-//			// 바보
-//			System.out.println((laserAttack) ? "laserattack" : "bombattack");
-//			for (int i = 1; i <= N; i++) {
-//				for (int j = 1; j <= M; j++) {
-//					System.out.print(map[i][j].hp + " ");
-//				}
-//				System.out.print("\n");
-//			}
-//			System.out.print("\n");
-//			//
+			// // 바보
+			// System.out.println((laserAttack) ? "laserattack" : "bombattack");
+			// for (int i = 1; i <= N; i++) {
+			// 	for (int j = 1; j <= M; j++) {
+			// 		System.out.print(map[i][j].hp + " ");
+			// 	}
+			// 	System.out.print("\n");
+			// }
+			// System.out.print("\n");
+			// //
 
 			if (!checkRemaining())
 				break;
